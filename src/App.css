@@ -1,0 +1,597 @@
+/* ── KEYFRAMES ─────────────────────────────────────── */
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.4; transform: scale(0.75); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-18px); }
+}
+
+@keyframes glow-breathe {
+  0%, 100% { opacity: 0.7; transform: translate(-50%, -50%) scale(1); }
+  50%       { opacity: 1;   transform: translate(-50%, -50%) scale(1.15); }
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
+}
+
+@keyframes orbit {
+  from { transform: rotate(0deg)   translateX(180px) rotate(0deg); }
+  to   { transform: rotate(360deg) translateX(180px) rotate(-360deg); }
+}
+
+@keyframes orbit2 {
+  from { transform: rotate(180deg) translateX(240px) rotate(-180deg); }
+  to   { transform: rotate(540deg) translateX(240px) rotate(-540deg); }
+}
+
+@keyframes tick {
+  0%  { transform: translateY(0);    opacity: 1; }
+  40% { transform: translateY(-6px); opacity: 0; }
+  41% { transform: translateY(6px);  opacity: 0; }
+  80%, 100% { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes card-in {
+  from { opacity: 0; transform: translateX(16px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes ring-pulse {
+  0%   { transform: translate(-50%, -50%) scale(1);   opacity: 0.5; }
+  100% { transform: translate(-50%, -50%) scale(1.6); opacity: 0; }
+}
+
+/* ── LOGO ──────────────────────────────────────────── */
+.logo {
+  height: 180px;
+  width: auto;
+  margin-bottom: 20px;
+  animation: fade-up 0.6s ease both;
+}
+
+/* ── MAIN ──────────────────────────────────────────── */
+main {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 60px 56px;
+  position: relative;
+  overflow: hidden;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Ambient orbs */
+main::before,
+main::after {
+  content: '';
+  position: fixed;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+}
+main::before {
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(252,154,26,0.12) 0%, transparent 70%);
+  top: -100px; right: -100px;
+  animation: glow-breathe 6s ease-in-out infinite;
+}
+main::after {
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(224,120,16,0.09) 0%, transparent 70%);
+  bottom: -80px; left: 10%;
+  animation: glow-breathe 8s ease-in-out infinite reverse;
+}
+
+.hero-glow {
+  position: fixed;
+  width: 900px;
+  height: 900px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(252,154,26,0.14) 0%, transparent 65%);
+  top: 50%;
+  left: 30%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 0;
+  animation: glow-breathe 7s ease-in-out infinite;
+}
+
+.hero-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+  align-items: center;
+  column-gap: 80px;
+  row-gap: 0;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+/* Signup sits below left column on desktop */
+.hero-signup {
+  grid-column: 1;
+  grid-row: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 0;
+}
+
+/* ── LEFT — staggered fade-up ──────────────────────── */
+.hero-left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0;
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.logo        { animation: shimmer 4s linear infinite, fade-up 0.5s 0.0s ease both; }
+.badge       { animation: fade-up 0.5s 0.15s ease both; }
+h1           { animation: fade-up 0.5s 0.28s ease both; }
+.hero-sub    { animation: fade-up 0.5s 0.40s ease both; }
+.countdown   { animation: fade-up 0.5s 0.52s ease both; }
+.signup-form,
+.signup-success { animation: fade-up 0.5s 0.64s ease both; }
+.signup-note { animation: fade-up 0.5s 0.74s ease both; }
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(252,154,26,0.12);
+  border: 1px solid rgba(252,154,26,0.35);
+  border-radius: 100px;
+  padding: 6px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #fbbf24;
+  margin-bottom: 28px;
+}
+
+.badge-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #fc9a1a;
+  animation: pulse 2s infinite;
+}
+
+h1 {
+  font-size: clamp(40px, 4.5vw, 62px);
+  font-weight: 900;
+  letter-spacing: -2.5px;
+  line-height: 1.05;
+  margin-bottom: 24px;
+}
+
+h1 span {
+  background: linear-gradient(270deg, #fc9a1a, #e07810, #fc9a1a);
+  background-size: 300% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 4s linear infinite;
+}
+
+.hero-sub {
+  font-size: 17px;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin-bottom: 40px;
+  max-width: 440px;
+}
+
+/* ── COUNTDOWN ─────────────────────────────────────── */
+.countdown {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 40px;
+}
+
+.countdown-unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 16px 20px 12px;
+  min-width: 72px;
+  transition: border-color 0.3s;
+}
+
+.countdown-unit:hover {
+  border-color: rgba(252,154,26,0.4);
+}
+
+.countdown-num {
+  font-size: 32px;
+  font-weight: 900;
+  letter-spacing: -1px;
+  line-height: 1;
+  background: linear-gradient(135deg, #fc9a1a, #e07810);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-variant-numeric: tabular-nums;
+  animation: tick 1s ease-in-out;
+}
+
+.countdown-num.tick {
+  animation: tick 0.35s ease-in-out;
+}
+
+.countdown-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-top: 6px;
+}
+
+/* ── SIGNUP ────────────────────────────────────────── */
+.signup-form {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+  max-width: 420px;
+  margin-bottom: 16px;
+}
+
+.signup-form input {
+  flex: 1;
+  background: var(--surface);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 100px;
+  padding: 14px 22px;
+  font-size: 15px;
+  color: var(--text);
+  outline: none;
+  font-family: inherit;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.signup-form input::placeholder { color: var(--text-muted); }
+
+.signup-form input:focus {
+  border-color: rgba(252,154,26,0.5);
+  box-shadow: 0 0 0 3px rgba(252,154,26,0.12);
+}
+
+.signup-form button {
+  background: linear-gradient(135deg, #fc9a1a, #e07810);
+  color: #fff;
+  border: none;
+  border-radius: 100px;
+  padding: 14px 28px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+  white-space: nowrap;
+  transition: opacity 0.2s, transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 0 30px rgba(252,154,26,0.35);
+}
+
+.signup-form button:hover {
+  opacity: 0.88;
+  transform: translateY(-2px);
+  box-shadow: 0 0 50px rgba(252,154,26,0.55);
+}
+
+.signup-form button:active {
+  transform: translateY(0);
+}
+
+.signup-success {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(224,120,16,0.08);
+  border: 1px solid rgba(224,120,16,0.25);
+  border-radius: 14px;
+  padding: 14px 20px;
+  font-size: 15px;
+  font-weight: 500;
+  color: #fed7aa;
+  margin-bottom: 16px;
+  max-width: 420px;
+}
+
+.signup-note {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+/* ── RIGHT / DEVICES ───────────────────────────────── */
+.hero-right {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: fade-up 0.6s 0.3s ease both;
+  grid-column: 2;
+  grid-row: 1 / 3;
+}
+
+.devices-wrap {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Pulsing ring behind phone */
+.devices-wrap::before,
+.devices-wrap::after {
+  content: '';
+  position: absolute;
+  width: 340px;
+  height: 340px;
+  border-radius: 50%;
+  border: 1px solid rgba(252,154,26,0.25);
+  top: 50%;
+  left: 50%;
+  animation: ring-pulse 3s ease-out infinite;
+  pointer-events: none;
+}
+.devices-wrap::after {
+  animation-delay: 1.5s;
+}
+
+.devices-glow {
+  position: absolute;
+  width: 420px;
+  height: 420px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(252,154,26,0.25) 0%, transparent 70%);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 0;
+  animation: glow-breathe 5s ease-in-out infinite;
+}
+
+/* Orbiting dots */
+.orbit-dot {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  margin: -4px 0 0 -4px;
+  border-radius: 50%;
+  z-index: 4;
+}
+.orbit-dot-1 {
+  background: #fc9a1a;
+  box-shadow: 0 0 10px #fc9a1a;
+  animation: orbit 8s linear infinite;
+}
+.orbit-dot-2 {
+  background: #1e88e5;
+  box-shadow: 0 0 10px #1e88e5;
+  animation: orbit2 12s linear infinite;
+}
+
+/* ── iPHONE 16 PRO ─────────────────────────────────── */
+.phone {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: float 5s ease-in-out infinite;
+  z-index: 1;
+}
+
+/* Black Titanium body */
+.phone-ios {
+  width: 330px;
+  height: 700px;
+  border-radius: 52px;
+  background: linear-gradient(160deg, #3e3e40 0%, #2c2c2e 40%, #1c1c1e 100%);
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,0.18),
+    inset 1px 0 0 rgba(255,255,255,0.08),
+    0 50px 120px rgba(0,0,0,0.9),
+    0 20px 40px rgba(0,0,0,0.6),
+    0 0 60px rgba(252,154,26,0.15);
+  padding: 12px;
+}
+
+/* Side buttons */
+.btn-action, .btn-vol-up, .btn-vol-down,
+.btn-power, .btn-camera-ctrl {
+  position: absolute;
+  background: linear-gradient(180deg, #3e3e40, #2a2a2c);
+  z-index: 5;
+}
+
+/* Left: Action button */
+.btn-action {
+  width: 4px; height: 38px;
+  left: -4px; top: 116px;
+  border-radius: 3px 0 0 3px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.15), -2px 0 4px rgba(0,0,0,0.5);
+}
+
+/* Left: Volume up */
+.btn-vol-up {
+  width: 4px; height: 72px;
+  left: -4px; top: 178px;
+  border-radius: 3px 0 0 3px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.15), -2px 0 4px rgba(0,0,0,0.5);
+}
+
+/* Left: Volume down */
+.btn-vol-down {
+  width: 4px; height: 72px;
+  left: -4px; top: 266px;
+  border-radius: 3px 0 0 3px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.15), -2px 0 4px rgba(0,0,0,0.5);
+}
+
+/* Right: Power */
+.btn-power {
+  width: 4px; height: 84px;
+  right: -4px; top: 200px;
+  border-radius: 0 3px 3px 0;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.15), 2px 0 4px rgba(0,0,0,0.5);
+}
+
+/* Right: Camera Control (iPhone 16 exclusive) */
+.btn-camera-ctrl {
+  width: 4px; height: 58px;
+  right: -4px; top: 440px;
+  border-radius: 0 3px 3px 0;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.15), 2px 0 4px rgba(0,0,0,0.5);
+}
+
+/* Inner screen */
+.phone-inner {
+  width: 100%;
+  height: 100%;
+  border-radius: 42px;
+  background: #000;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Dynamic Island */
+.phone-island {
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 34px;
+  background: #000;
+  border-radius: 100px;
+  z-index: 2;
+  transition: width 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+
+/* Screenshot */
+.phone-screenshot {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Frame shine */
+.phone-shine {
+  position: absolute;
+  inset: 0;
+  border-radius: 42px;
+  background: linear-gradient(
+    135deg,
+    rgba(255,255,255,0.07) 0%,
+    transparent 45%,
+    rgba(0,0,0,0.2) 100%
+  );
+  pointer-events: none;
+  z-index: 3;
+}
+
+/* ── RESPONSIVE ────────────────────────────────────── */
+@media (max-width: 900px) {
+  main {
+    padding: 32px 20px 48px;
+    min-height: 100svh;
+  }
+
+  .hero-content {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+    gap: 0;
+    text-align: center;
+  }
+
+  .hero-left {
+    grid-column: 1;
+    grid-row: 1;
+    align-items: center;
+    padding-top: 16px;
+  }
+
+  .hero-right {
+    grid-column: 1;
+    grid-row: 2;
+    padding: 32px 0;
+  }
+
+  .hero-signup {
+    grid-column: 1;
+    grid-row: 3;
+    align-items: center;
+  }
+
+  /* Logo on mobile */
+  .logo { height: 165px; margin-bottom: 12px; }
+
+  /* Tighter headline */
+  h1 { font-size: clamp(30px, 8vw, 48px); letter-spacing: -1.5px; margin-bottom: 16px; }
+
+  .hero-sub {
+    font-size: 15px;
+    max-width: 100%;
+    margin-bottom: 28px;
+  }
+
+  /* Phone — scaled to feel native */
+  .phone-ios {
+    width: 200px;
+    height: 424px;
+    padding: 8px;
+    border-radius: 36px;
+  }
+  .phone-inner  { border-radius: 29px; }
+  .phone-shine  { border-radius: 29px; }
+
+  /* Hide side buttons on small mockup */
+  .btn-action, .btn-vol-up, .btn-vol-down,
+  .btn-power, .btn-camera-ctrl { display: none; }
+
+  /* Orbit rings smaller */
+  .devices-wrap::before,
+  .devices-wrap::after { width: 240px; height: 240px; }
+  .devices-glow { width: 280px; height: 280px; }
+
+  /* Countdown */
+  .countdown { gap: 8px; margin-bottom: 28px; }
+  .countdown-unit { min-width: 62px; padding: 12px 16px 10px; border-radius: 12px; }
+  .countdown-num  { font-size: 28px; }
+  .countdown-label { font-size: 10px; }
+
+  /* Signup */
+  .signup-form {
+    flex-direction: column;
+    max-width: 320px;
+    margin-bottom: 12px;
+  }
+  .signup-form input  { text-align: center; border-radius: 14px; }
+  .signup-form button { width: 100%; border-radius: 14px; }
+  .signup-success { max-width: 100%; justify-content: center; }
+
+  .signup-note { font-size: 12px; }
+}

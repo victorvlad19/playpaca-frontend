@@ -1,35 +1,6 @@
-import { useState, useEffect } from 'react'
 import './App.css'
 import s1 from './assets/S1.png'
 import logo from './assets/playpaca_logo.svg'
-
-function getNextMonday() {
-  const now = new Date()
-  const day = now.getDay() // 0 = Sun, 1 = Mon, ...
-  const daysUntilMonday = day === 1 ? 7 : (8 - day) % 7
-  const next = new Date(now)
-  next.setDate(now.getDate() + daysUntilMonday)
-  next.setHours(0, 0, 0, 0)
-  return next
-}
-
-function useCountdown(target) {
-  const calc = () => {
-    const diff = Math.max(0, target - Date.now())
-    return {
-      days:    Math.floor(diff / 86400000),
-      hours:   Math.floor((diff % 86400000) / 3600000),
-      minutes: Math.floor((diff % 3600000)  / 60000),
-      seconds: Math.floor((diff % 60000)    / 1000),
-    }
-  }
-  const [time, setTime] = useState(calc)
-  useEffect(() => {
-    const id = setInterval(() => setTime(calc()), 1000)
-    return () => clearInterval(id)
-  }, [target])
-  return time
-}
 
 
 const events = [
@@ -83,18 +54,10 @@ const Devices = () => (
 )
 
 export default function App() {
-  const { days, hours, minutes, seconds } = useCountdown(getNextMonday())
-  const [email, setEmail] = useState('')
-  const [submitted, setSubmitted] = useState(false)
-
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    if (email) setSubmitted(true)
-  }
-
   return (
+    <>
+    <div className="hero-glow" />
     <main>
-      <div className="hero-glow" />
 
       <div className="hero-content">
         {/* LEFT */}
@@ -102,8 +65,9 @@ export default function App() {
           <img src={logo} className="logo" alt="PlayPaca" />
 
           <h1>
-            Join the board game<br />
-            night <span>everyone's</span><br />
+            Join the<br />
+            board&nbsp;game&nbsp;night<br />
+            <span>everyone's</span><br />
             talking about.
           </h1>
 
@@ -111,13 +75,25 @@ export default function App() {
             We host weekly board game events open to everyone. Reserve your spot, show up, and play.
           </p>
 
-          <div className="countdown">
-            {[['Days', days], ['Hours', hours], ['Mins', minutes], ['Secs', seconds]].map(([label, val]) => (
-              <div className="countdown-unit" key={label}>
-                <span className="countdown-num" key={val}>{String(val).padStart(2, '0')}</span>
-                <span className="countdown-label">{label}</span>
+          <div className="store-buttons">
+            <a href="#" className="store-btn store-btn-ios">
+              <svg className="store-btn-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+              </svg>
+              <div className="store-btn-text">
+                <span className="store-btn-sub">Download on the</span>
+                <span className="store-btn-title">App Store</span>
               </div>
-            ))}
+            </a>
+            <a href="#" className="store-btn store-btn-android">
+              <svg className="store-btn-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M3.18 23.76c.3.17.64.17.94 0l10.82-6.25-2.5-2.5-9.26 8.75zM.54 1.73C.2 2.03 0 2.5 0 3.13v17.74c0 .63.2 1.1.54 1.4l.07.07 9.93-9.93v-.23L.61 1.66l-.07.07zM20.46 10.37l-2.82-1.63-2.82 1.63 2.82 1.63 2.82-1.63zm-2.82-3.02L3.18.11c-.3-.17-.64-.17-.94 0L2.17.18l10.82 6.25 4.65-2.69-.07-.07-.93-.32z"/>
+              </svg>
+              <div className="store-btn-text">
+                <span className="store-btn-sub">Get it on</span>
+                <span className="store-btn-title">Google Play</span>
+              </div>
+            </a>
           </div>
         </div>
 
@@ -125,28 +101,8 @@ export default function App() {
         <div className="hero-right">
           <Devices />
         </div>
-
-        {/* SIGNUP — below phone on mobile */}
-        <div className="hero-signup">
-          {!submitted ? (
-            <form className="signup-form" onSubmit={handleSubmit}>
-              <input
-                type="email"
-                placeholder="your@email.com"
-                value={email}
-                onChange={e => setEmail(e.target.value)}
-                required
-              />
-              <button type="submit">Notify me</button>
-            </form>
-          ) : (
-            <div className="signup-success">
-              <span>🎉</span> You're on the list — we'll ping you at launch!
-            </div>
-          )}
-          <p className="signup-note">iOS & Android · Free to join · No spam, ever.</p>
-        </div>
       </div>
     </main>
+    </>
   )
 }

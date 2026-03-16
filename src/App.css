@@ -73,21 +73,21 @@ main {
 }
 
 /* Ambient orbs */
-main::before,
-main::after {
+body::before,
+body::after {
   content: '';
   position: fixed;
   border-radius: 50%;
   pointer-events: none;
   z-index: 0;
 }
-main::before {
+body::before {
   width: 500px; height: 500px;
   background: radial-gradient(circle, rgba(252,154,26,0.12) 0%, transparent 70%);
   top: -100px; right: -100px;
   animation: glow-breathe 6s ease-in-out infinite;
 }
-main::after {
+body::after {
   width: 400px; height: 400px;
   background: radial-gradient(circle, rgba(224,120,16,0.09) 0%, transparent 70%);
   bottom: -80px; left: 10%;
@@ -120,15 +120,6 @@ main::after {
   z-index: 1;
 }
 
-/* Signup sits below left column on desktop */
-.hero-signup {
-  grid-column: 1;
-  grid-row: 2;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  margin-top: 0;
-}
 
 /* ── LEFT — staggered fade-up ──────────────────────── */
 .hero-left {
@@ -144,10 +135,7 @@ main::after {
 .badge       { animation: fade-up 0.5s 0.15s ease both; }
 h1           { animation: fade-up 0.5s 0.28s ease both; }
 .hero-sub    { animation: fade-up 0.5s 0.40s ease both; }
-.countdown   { animation: fade-up 0.5s 0.52s ease both; }
-.signup-form,
-.signup-success { animation: fade-up 0.5s 0.64s ease both; }
-.signup-note { animation: fade-up 0.5s 0.74s ease both; }
+.store-buttons { animation: fade-up 0.5s 0.52s ease both; }
 
 .badge {
   display: inline-flex;
@@ -196,127 +184,78 @@ h1 span {
   max-width: 440px;
 }
 
-/* ── COUNTDOWN ─────────────────────────────────────── */
-.countdown {
+/* ── STORE BUTTONS ─────────────────────────────────── */
+.store-buttons {
   display: flex;
-  gap: 12px;
-  margin-bottom: 40px;
+  gap: 14px;
+  margin-top: 8px;
+  animation: fade-up 0.5s 0.52s ease both;
 }
 
-.countdown-unit {
+.store-btn {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  padding: 16px 20px 12px;
-  min-width: 72px;
-  transition: border-color 0.3s;
+  gap: 12px;
+  padding: 12px 22px;
+  border-radius: 16px;
+  text-decoration: none;
+  transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
+  cursor: pointer;
+  min-width: 160px;
 }
 
-.countdown-unit:hover {
-  border-color: rgba(252,154,26,0.4);
+.store-btn-ios {
+  background: #fff;
+  color: #000;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.25);
 }
 
-.countdown-num {
-  font-size: 32px;
-  font-weight: 900;
-  letter-spacing: -1px;
-  line-height: 1;
-  background: linear-gradient(135deg, #fc9a1a, #e07810);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  font-variant-numeric: tabular-nums;
-  animation: tick 1s ease-in-out;
-}
-
-.countdown-num.tick {
-  animation: tick 0.35s ease-in-out;
-}
-
-.countdown-label {
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  color: var(--text-muted);
-  margin-top: 6px;
-}
-
-/* ── SIGNUP ────────────────────────────────────────── */
-.signup-form {
-  display: flex;
-  gap: 8px;
-  width: 100%;
-  max-width: 420px;
-  margin-bottom: 16px;
-}
-
-.signup-form input {
-  flex: 1;
-  background: var(--surface);
-  border: 1px solid rgba(255,255,255,0.1);
-  border-radius: 100px;
-  padding: 14px 22px;
-  font-size: 15px;
-  color: var(--text);
-  outline: none;
-  font-family: inherit;
-  transition: border-color 0.3s, box-shadow 0.3s;
-}
-
-.signup-form input::placeholder { color: var(--text-muted); }
-
-.signup-form input:focus {
-  border-color: rgba(252,154,26,0.5);
-  box-shadow: 0 0 0 3px rgba(252,154,26,0.12);
-}
-
-.signup-form button {
+.store-btn-android {
   background: linear-gradient(135deg, #fc9a1a, #e07810);
   color: #fff;
-  border: none;
-  border-radius: 100px;
-  padding: 14px 28px;
-  font-size: 15px;
-  font-weight: 700;
-  cursor: pointer;
-  font-family: inherit;
-  white-space: nowrap;
-  transition: opacity 0.2s, transform 0.2s, box-shadow 0.2s;
-  box-shadow: 0 0 30px rgba(252,154,26,0.35);
+  box-shadow: 0 4px 24px rgba(252,154,26,0.35);
 }
 
-.signup-form button:hover {
-  opacity: 0.88;
-  transform: translateY(-2px);
-  box-shadow: 0 0 50px rgba(252,154,26,0.55);
+.store-btn:hover {
+  transform: translateY(-3px);
 }
 
-.signup-form button:active {
+.store-btn-ios:hover {
+  box-shadow: 0 8px 32px rgba(0,0,0,0.35);
+}
+
+.store-btn-android:hover {
+  box-shadow: 0 8px 40px rgba(252,154,26,0.55);
+  opacity: 0.92;
+}
+
+.store-btn:active {
   transform: translateY(0);
 }
 
-.signup-success {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  background: rgba(224,120,16,0.08);
-  border: 1px solid rgba(224,120,16,0.25);
-  border-radius: 14px;
-  padding: 14px 20px;
-  font-size: 15px;
-  font-weight: 500;
-  color: #fed7aa;
-  margin-bottom: 16px;
-  max-width: 420px;
+.store-btn-icon {
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
 }
 
-.signup-note {
-  font-size: 13px;
-  color: var(--text-muted);
+.store-btn-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.store-btn-sub {
+  font-size: 11px;
+  font-weight: 500;
+  opacity: 0.7;
+  line-height: 1;
+  margin-bottom: 2px;
+}
+
+.store-btn-title {
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1;
 }
 
 /* ── RIGHT / DEVICES ───────────────────────────────── */
@@ -537,16 +476,10 @@ h1 span {
   .hero-right {
     grid-column: 1;
     grid-row: 2;
-    padding: 32px 0;
+    padding: 64px 0 32px;
   }
 
-  .hero-signup {
-    grid-column: 1;
-    grid-row: 3;
-    align-items: center;
-  }
-
-  /* Logo on mobile */
+/* Logo on mobile */
   .logo { height: 165px; margin-bottom: 12px; }
 
   /* Tighter headline */
@@ -577,21 +510,16 @@ h1 span {
   .devices-wrap::after { width: 240px; height: 240px; }
   .devices-glow { width: 280px; height: 280px; }
 
-  /* Countdown */
-  .countdown { gap: 8px; margin-bottom: 28px; }
-  .countdown-unit { min-width: 62px; padding: 12px 16px 10px; border-radius: 12px; }
-  .countdown-num  { font-size: 28px; }
-  .countdown-label { font-size: 10px; }
-
-  /* Signup */
-  .signup-form {
+  /* Store buttons */
+  .store-buttons {
     flex-direction: column;
-    max-width: 320px;
-    margin-bottom: 12px;
+    align-items: center;
+    gap: 10px;
   }
-  .signup-form input  { text-align: center; border-radius: 14px; }
-  .signup-form button { width: 100%; border-radius: 14px; }
-  .signup-success { max-width: 100%; justify-content: center; }
 
-  .signup-note { font-size: 12px; }
+  .store-btn {
+    width: 100%;
+    max-width: 280px;
+    justify-content: center;
+  }
 }

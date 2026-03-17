@@ -45,7 +45,6 @@ const Devices = () => (
 
       {/* Screen */}
       <div className="phone-inner">
-        <div className="phone-island" />
         <img src={s1} className="phone-screenshot" alt="App screenshot" />
         <div className="phone-shine" />
       </div>
